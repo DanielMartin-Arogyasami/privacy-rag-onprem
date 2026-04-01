@@ -1,0 +1,29 @@
+# Privacy-Preserving Clinical RAG System — Cursor AI Rules
+
+## Project Context
+Companion implementation for the paper "Privacy-Preserving RAG for Clinical Data Systems."
+Fully on-premises RAG for clinical/pharmaceutical environments.
+ALL data is PUBLIC (PubMed, DrugBank open access, BioASQ). No proprietary data.
+
+## Architecture (6 Layers)
+1. Ingestion — Parse PDFs, DOCX, PubMed XML; de-identify PHI at ingest
+2. Chunking — Structure-aware chunking preserving clinical document hierarchy
+3. Embedding & Indexing — BGE-large-en-v1.5 locally; stored in Qdrant (self-hosted)
+4. Hybrid Retrieval — BM25 + dense ANN + cross-encoder reranking with ACL enforcement
+5. Local LLM Inference — vLLM serving quantized models (AWQ 4-bit); structured prompting
+6. Response Filtering — PHI scanning, hallucination checks, audit logging
+
+## Formal Constraints (C1–C5)
+- C1: Every claim in responses must cite retrieved passages
+- C2: Retrieval respects user access control lists (ACLs)
+- C3: All computation stays within the security perimeter (no external calls)
+- C4: Every query/response is audit-logged with full provenance
+- C5: System must abstain when evidence is insufficient
+
+## Code Conventions
+- Type hints on all functions
+- Pydantic models for all data structures with validation constraints
+- Dependency injection for swappable backends
+- Bearer token auth when ENABLE_AUTH=true
+- fcntl file locking on audit logs for multi-worker safety
+- No external API calls at runtime

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the companion paper."
+title: "Privacy-Preserving RAG for Clinical Data Systems"
+type: software
+authors:
+  - family-names: Arogyasami
+    given-names: DanielMartin
+license: MIT
+repository-code: "https://github.com/YOUR_USERNAME/privacy-rag-onprem"
+preferred-citation:
+  type: article
+  title: "Privacy-Preserving Retrieval-Augmented Generation for Clinical Data Systems: Architecture, Deployment, and Regulatory Compliance for On-Premises Healthcare AI"
+  authors:
+    - family-names: Arogyasami
+      given-names: DanielMartin
+  year: 2026
